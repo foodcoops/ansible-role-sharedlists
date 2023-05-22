@@ -1,0 +1,14 @@
+---
+- name: "Packages | Check facts"
+  ansible.builtin.package_facts:
+    manager: apt
+
+- name: "Packages | Install packages"
+  ansible.builtin.apt:
+    pkg:
+      - default-libmysqlclient-dev
+      - libxml2-dev
+      - libxslt-dev
+      - libyaml-dev
+      - pkg-config
+      - rbenv

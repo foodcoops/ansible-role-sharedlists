@@ -1,0 +1,45 @@
+---
+- name: "Database | Create database"
+  community.mysql.mysql_db:
+    name: "{{ sharedlists_db }}"
+    state: present
+    login_unix_socket: "{{ mariadb_socket }}"
+    login_user: root
+
+- name: "Database | Create database user"
+  community.mysql.mysql_user:
+    name: "{{ sharedlists_db_user }}"
+    password: "{{ sharedlists_db_password }}"
+    priv: "{{ sharedlists_db }}.*:ALL"
+    state: present
+    login_unix_socket: "{{ mariadb_socket }}"
+    login_user: root
+    update_password: on_create
+
+- name: "Database | Copy database configuration"
+  ansible.builtin.template:
+    src: database.yml.j2
+    dest: "{{ sharedlists_home }}/config/database.yml"
+    owner: "{{ sharedlists_user }}"
+    group: "{{ sharedlists_user }}"
+    mode: "0600"
+
+- name: "Database | Run migrations"
+  ansible.builtin.command:
+    cmd: "rbenv exec bundle exec rails db:migrate"
+    chdir: "{{ sharedlists_home }}"
+  environment:
+    RAILS_ENV: production
+    SECRET_KEY_BASE: "{{ sharedlists_secret_key_base }}"
+  become: true
+  become_user: "{{ sharedlists_user }}"
+
+- name: "Database | Compile assets"
+  ansible.builtin.command: 
+    cmd: "rbenv exec bundle exec rails assets:precompile"
+    chdir: "{{ sharedlists_home }}"
+  environment:
+    RAILS_ENV: production
+    SECRET_KEY_BASE: "{{ sharedlists_secret_key_base }}"
+  become: true
+  become_user: "{{ sharedlists_user }}"

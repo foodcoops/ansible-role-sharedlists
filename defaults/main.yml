@@ -1,0 +1,18 @@
+---
+ruby_path: "{{ sharedlists_user_home }}/.rbenv"
+ruby_build_git_url: https://github.com/rbenv/ruby-build.git
+
+sharedlists_environment_file: /etc/sharedlists/sharedlists.conf
+sharedlists_db: sharedlists
+sharedlists_db_user: sharedlists
+sharedlists_git_url: https://github.com/foodcoops/sharedlists.git
+sharedlists_git_branch: main
+sharedlists_home: /opt/sharedlists
+sharedlists_secret_key_base: "{{ lookup('password', '/tmp/sharedlists_secret_key_base_pwd length=42 chars=ascii_letters,digits') }}"
+sharedlists_user: _sharedlists
+sharedlists_user_home: "/var/lib/{{ sharedlists_user }}"
+sharedlists_web_bind_ip: "127.0.0.1"
+sharedlists_web_port: "3000"
+sharedlists_web_service: sharedlists-web.service
+sharedlists_smtp_service: sharedlists-smtp.service
+sharedlists_web_socket: sharedlists-web.socket

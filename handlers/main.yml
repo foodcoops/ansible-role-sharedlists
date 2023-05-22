@@ -1,0 +1,33 @@
+---
+- name: reload monit
+  ansible.builtin.service:
+    name: monit
+    state: reloaded
+
+- name: restart munin-node
+  ansible.builtin.service:
+    name: munin-node
+    state: restarted
+
+- name: reload nginx
+  ansible.builtin.service:
+    name: nginx
+    state: reloaded
+
+- name: restart sharedlists_web
+  ansible.builtin.systemd:
+    name: "{{ sharedlists_web_service }}"
+    daemon_reload: true
+    state: restarted
+
+- name: restart sharedlists_smtp
+  ansible.builtin.systemd:
+    name: "{{ sharedlists_smtp_service }}"
+    daemon_reload: true
+    state: restarted
+
+- name: restart sharedlists_web_socket
+  ansible.builtin.systemd:
+    name: "{{ sharedlists_web_socket }}"
+    daemon_reload: true
+    state: restarted

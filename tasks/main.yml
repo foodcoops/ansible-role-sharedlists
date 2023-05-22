@@ -1,0 +1,27 @@
+- name: Packages
+  ansible.builtin.import_tasks: packages.yml
+  tags: packages
+
+- name: User
+  ansible.builtin.import_tasks: user.yml
+  tags: user
+
+- name: Sharedlists
+  ansible.builtin.import_tasks: sharedlists.yml
+  tags: sharedlists
+
+- name: Database
+  ansible.builtin.import_tasks: database.yml
+  tags: database
+
+- name: Systemd
+  ansible.builtin.import_tasks: systemd.yml
+  tags: systemd
+
+- name: Cron
+  ansible.builtin.import_tasks: cron.yml
+  tags: cron
+
+- name: Monitoring
+  ansible.builtin.import_tasks: monitoring.yml
+  tags: monitoring
