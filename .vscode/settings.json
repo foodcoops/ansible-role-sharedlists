@@ -1,0 +1,8 @@
+{
+    "ansible.python.interpreterPath": "/bin/python3.11",
+    "files.associations": {
+        "*.j2": "ansible-jinja",
+        "*.yaml": "ansible",
+        "*.yml": "ansible"
+    }
+}
