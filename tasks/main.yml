@@ -21,7 +21,3 @@
 - name: Cron
   ansible.builtin.import_tasks: cron.yml
   tags: cron
-
-- name: Monitoring
-  ansible.builtin.import_tasks: monitoring.yml
-  tags: monitoring

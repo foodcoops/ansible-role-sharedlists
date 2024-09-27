@@ -35,7 +35,7 @@
   become_user: "{{ sharedlists_user }}"
 
 - name: "Database | Compile assets"
-  ansible.builtin.command: 
+  ansible.builtin.command:
     cmd: "rbenv exec bundle exec rails assets:precompile"
     chdir: "{{ sharedlists_home }}"
   environment:
