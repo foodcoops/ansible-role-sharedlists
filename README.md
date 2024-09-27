@@ -26,7 +26,7 @@ You can adapt the role to your needs via the following variables. Please note: I
 | `sharedlists_db_user` | `sharedlists` | Name of the Sharedlists database user |
 | `sharedlists_db_password` | | Database password |
 | `sharedlists_environment_file` | `/etc/sharedlists/sharedlists.conf` | Sharedlists configuration file used by systemd service |
-| `sharedlists_git_branch` | `main` | Sharedlists version to install |
+| `sharedlists_version` | `main` | Sharedlists version to install |
 | `sharedlists_git_url` | `https://github.com/foodcoops/sharedlists.git` | Sharedlists repository to use |
 | `sharedlists_web_service` | `sharedlists-web.service` | Name of the Sharedlists systemd web service |
 | `sharedlists_web_socket` | `sharedlists-web.socket` | Name of the Sharedlists systemd web socket |

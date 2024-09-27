@@ -7,7 +7,7 @@
   ansible.builtin.git:
     repo: "{{ sharedlists_git_url }}"
     dest: "{{ sharedlists_home }}"
-    version: "{{ sharedlists_git_branch }}"
+    version: "{{ sharedlists_version }}"
     force: true
 
 - name: "Sharedlists | Ruby version lookup"
