@@ -57,22 +57,19 @@
   become_user: "{{ sharedlists_user }}"
 
 # https://nokogiri.org/tutorials/installing_nokogiri.html#installing-using-standard-system-libraries
-- name: "Sharedlists | Configure nokogiri"
+- name: "Sharedlists | Set bundle optionsConfigure nokogiri"
   ansible.builtin.command:
-    cmd: 'rbenv exec bundle config build.nokogiri "--use-system-libraries"'
+    cmd: "rbenv exec bundle config {{ item }}"
     chdir: "{{ sharedlists_home }}"
   become: true
   become_user: "{{ sharedlists_user }}"
   environment:
     RAILS_ENV: production
-
-- name: "Sharedlists | Set bundle options"
-  ansible.builtin.command:
-    cmd: "rbenv exec bundle config set --local without 'development test'"
-    chdir: "{{ sharedlists_home }}"
-    creates: "{{ sharedlists_home }}/.bundle/config"
-  become: true
-  become_user: "{{ sharedlists_user }}"
+  loop:
+    - build.nokogiri --use-system-libraries
+    - set --local without 'development test'
+    - set --local deployment true
+  changed_when: true
 
 - name: "Sharedlists | Install ruby packages"
   ansible.builtin.command:
